@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import com.hotpatch.IPatchInfoRequest;
 import com.hotpatch.OnRequestCallBackListener;
 import com.hotpatch.PatchInfo;
-import com.hotpatch.RequestManager;
 import com.hotpatch.Utils;
 
 import org.json.JSONException;
