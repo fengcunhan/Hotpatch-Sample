@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 
 import com.hotpatch.IPatchInfoRequest;
+import com.hotpatch.OnRequestCallBackListener;
 import com.hotpatch.PatchInfo;
 import com.hotpatch.RequestManager;
 import com.hotpatch.Utils;
@@ -31,7 +32,7 @@ public class DefaultPatchInfoRequest implements IPatchInfoRequest {
         this.mContext=ctx;
     }
     @Override
-    public void getPatchInfo(RequestManager.OnRequestCallBackListener listener, String currentVersion, Object... objects) {
+    public void getPatchInfo(OnRequestCallBackListener listener, String currentVersion, Object... objects) {
         String version= Utils.getVersionName(mContext);
         hostUrl=hostUrl+version;
         GetPatchInfoTask task=new GetPatchInfoTask(hostUrl,listener);
@@ -40,8 +41,8 @@ public class DefaultPatchInfoRequest implements IPatchInfoRequest {
 
     class GetPatchInfoTask extends AsyncTask<String,Integer,String>{
         private String requestUrl;
-        private RequestManager.OnRequestCallBackListener mOnRequestCallBackListener;
-        public GetPatchInfoTask(String url,RequestManager.OnRequestCallBackListener listener){
+        private OnRequestCallBackListener mOnRequestCallBackListener;
+        public GetPatchInfoTask(String url,OnRequestCallBackListener listener){
             this.requestUrl=url;
             this.mOnRequestCallBackListener=listener;
         }

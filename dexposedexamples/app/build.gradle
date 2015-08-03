@@ -26,5 +26,5 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.hotpatch:app:0.0.3'
+    compile 'com.hotpatch:app:0.0.4'
 }
