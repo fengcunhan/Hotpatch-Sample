@@ -55,4 +55,14 @@
         android:text="@string/run_patch_apk"
         android:onClick="runPatchApk" />
 
+    <Button
+        android:id="@+id/jump_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/hello_world"
+        android:layout_below="@+id/run_patch_apk"
+        android:layout_marginTop="22dp"
+        android:text="Hook Fragment"
+        android:onClick="checkFragment" />
+
 </RelativeLayout>

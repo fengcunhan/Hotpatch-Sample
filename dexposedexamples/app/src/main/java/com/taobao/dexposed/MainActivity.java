@@ -3,6 +3,7 @@ package com.taobao.dexposed;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,7 +11,10 @@ import android.widget.TextView;
 
 import com.taobao.android.dexposed.XC_MethodHook;
 import com.taobao.android.dexposed.DexposedBridge;
+import com.taobao.patch.PatchMain;
+import com.taobao.patch.PatchResult;
 
+import java.io.File;
 
 
 public class MainActivity extends Activity {
@@ -21,6 +25,7 @@ public class MainActivity extends Activity {
 	
 	private TextView mLogContent;
 
+	private boolean isPathed=false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,29 +85,26 @@ public class MainActivity extends Activity {
 			Log.d("dexposed", "This device doesn't support dexposed!");
 			return;
 		}
-		/**
-		String signs= Utils.md5(Utils.getInstallPackageSignature(this, getPackageName()));
-		String apkSigns= Utils.md5(Utils.getApkSignature("/sdcard/app-debug.apk"));
-		Log.e("sings",signs);
-		Log.e("apkSigns",apkSigns);
-		if(!TextUtils.equals(signs,apkSigns)){
-			Log.d("dexposed", "sign not equals");
-			return;
-		}
-
-		File cacheDir = getExternalCacheDir();
-    	if(cacheDir != null){
-    		String fullpath = cacheDir.getAbsolutePath() + File.separator + "patch.apk";
-    		PatchResult result = PatchMain.load(this, "/sdcard/app-debug.apk", null);
-    		if (result.isSuccess()) {
-    			Log.e("Hotpatch", "patch success!");
-    		} else {
-    			Log.e("Hotpatch", "patch error is " + result.getErrorInfo());
-    		}
-    	}**/
+		patch();
     	showDialog();
 	}
-	
+
+	private void patch(){
+		File cacheDir = getExternalCacheDir();
+		if(cacheDir != null){
+			String fullpath = "/sdcard/app-debug.apk";
+			File file=new File(fullpath);
+
+			PatchResult result = PatchMain.load(this, "/sdcard/app-debug.apk", null);
+			isPathed=result.isSuccess();
+			if (result.isSuccess()) {
+				Log.e("Hotpatch", "patch success!");
+			} else {
+				Log.e("Hotpatch", "patch error is " + result.getErrorInfo());
+			}
+		}
+	}
+
 	private void showDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Dexposed sample")
@@ -112,5 +114,13 @@ public class MainActivity extends Activity {
 					public void onClick(DialogInterface dialog, int whichButton) {
 					}
 				}).create().show();
+	}
+
+	public void checkFragment(View view){
+		if(!isPathed){
+			patch();
+		}
+		Intent intent=new Intent(this,FragmentActivity.class);
+		startActivity(intent);
 	}
 }
