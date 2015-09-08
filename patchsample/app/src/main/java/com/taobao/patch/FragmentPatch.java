@@ -19,11 +19,14 @@ public class FragmentPatch implements IPatch {
         {
             Class<?> cls = null;
             try {
-                cls= patchParam.context.getClass().getClassLoader().loadClass("com.taobao.dexposed.TestFragment");
+                cls= patchParam.context.getClass().getClassLoader().loadClass("com.taobao.dexposed.g");
             } catch (Exception e) {
                 e.printStackTrace();
                 return;
             }
+
+            /**
+             * 为了验证混淆状态下的path，暂时屏蔽这个patch
             Log.e(TAG, "cls:" + cls);
             DexposedBridge.findAndHookMethod(cls, "getText", new XC_MethodReplacement() {
                 @Override
@@ -42,6 +45,7 @@ public class FragmentPatch implements IPatch {
                     return tv;
                 }
             });
+             **/
         }
     }
 }

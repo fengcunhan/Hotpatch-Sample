@@ -10,12 +10,30 @@ android {
         targetSdkVersion 21
         versionName "1.0"
     }
+    signingConfigs {
+        debug {
+            // No debug config
+        }
+
+        release {
+            storeFile file("../keystore/netstars.keystore")
+            storePassword "123456"
+            keyAlias "netstars.keystore"
+            keyPassword "123456"
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 
     android {
         packagingOptions {

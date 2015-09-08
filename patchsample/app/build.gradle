@@ -9,16 +9,34 @@ android {
         minSdkVersion 9
         targetSdkVersion 21
     }
+    signingConfigs {
+        debug {
+            // No debug config
+        }
+
+        release {
+            storeFile file("../keystore/netstars.keystore")
+            storePassword "123456"
+            keyAlias "netstars.keystore"
+            keyPassword "123456"
+        }
+    }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            //minifyEnabled true
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            signingConfig signingConfigs.release
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
+    //compile fileTree(dir: 'libs', include: ['*.jar'])
     provided files('libs/dexposedbridge.jar')
     provided files('libs/patchloader.jar')
 }

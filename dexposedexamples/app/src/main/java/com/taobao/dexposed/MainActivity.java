@@ -92,10 +92,10 @@ public class MainActivity extends Activity {
 	private void patch(){
 		File cacheDir = getExternalCacheDir();
 		if(cacheDir != null){
-			String fullpath = "/sdcard/app-debug.apk";
+			String fullpath = "/sdcard/app-release.apk";
 			File file=new File(fullpath);
 
-			PatchResult result = PatchMain.load(this, "/sdcard/app-debug.apk", null);
+			PatchResult result = PatchMain.load(this, fullpath, null);
 			isPathed=result.isSuccess();
 			if (result.isSuccess()) {
 				Log.e("Hotpatch", "patch success!");

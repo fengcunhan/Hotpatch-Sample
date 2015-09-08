@@ -8,10 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.taobao.model.Test;
+
 /**
  * Created by renxuan on 15/8/25.
  */
 public class TestFragment extends Fragment {
+    private Test mTest;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mTest=new Test();
+    }
 
     @Nullable
     @Override
@@ -22,6 +31,7 @@ public class TestFragment extends Fragment {
     }
 
     public String getText(){
-        return "Fragment test";
+        //如果 没有patch成功，那就得到hello
+        return mTest.getHello(-1);
     }
 }

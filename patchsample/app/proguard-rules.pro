@@ -16,5 +16,5 @@
 #   public *;
 #}
 
--keep class  com.taobao.android.dexposed.** { *; }
--keep class  com.taobao.patch.** { *; }
+-dontwarn com.taobao.patch.**
+-dontwarn com.taobao.android.dexposed.**
