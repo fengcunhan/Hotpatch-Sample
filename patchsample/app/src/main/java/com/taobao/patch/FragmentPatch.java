@@ -19,7 +19,7 @@ public class FragmentPatch implements IPatch {
         {
             Class<?> cls = null;
             try {
-                cls= patchParam.context.getClass().getClassLoader().loadClass("com.taobao.dexposed.g");
+                cls= patchParam.context.getClass().getClassLoader().loadClass("com.taobao.dexposed.TestFragment");
             } catch (Exception e) {
                 e.printStackTrace();
                 return;

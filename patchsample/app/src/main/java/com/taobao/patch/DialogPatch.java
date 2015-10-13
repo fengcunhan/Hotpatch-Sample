@@ -20,7 +20,7 @@ public class DialogPatch implements IPatch {
 			e.printStackTrace();
 			return;
 		}     	
-     	DexposedBridge.findAndHookMethod(cls, "b",
+     	DexposedBridge.findAndHookMethod(cls, "showDialog",
 				new XC_MethodReplacement() {
 					@Override
 					protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {

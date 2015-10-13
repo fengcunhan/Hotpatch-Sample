@@ -33,7 +33,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    lintOptions {
+        abortOnError false
+    }
 
     android {
         packagingOptions {
@@ -44,6 +46,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.hotpatch:app:0.0.6'
+    compile 'com.hotpatch:app:0.0.9'
     compile 'com.android.support:appcompat-v7:22.1.1'
 }

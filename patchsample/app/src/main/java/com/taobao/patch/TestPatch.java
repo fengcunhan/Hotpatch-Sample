@@ -20,16 +20,17 @@ public class TestPatch implements IPatch {
         {
             Class<?> cls = null;
             try {
-                cls= patchParam.context.getClass().getClassLoader().loadClass("com.taobao.a.a");
+                cls= patchParam.context.getClass().getClassLoader().loadClass("com.taobao.model.Test");
             } catch (Exception e) {
                 e.printStackTrace();
                 return;
             }
+
             Log.e(TAG, "cls:" + cls);
             /**
              * 修改逻辑，原先是==0的时候返回Patch success，现在改成<=0都是返回Patch Success
              * */
-            DexposedBridge.findAndHookMethod(cls, "a",int.class,new XC_MethodReplacement() {
+            DexposedBridge.findAndHookMethod(cls, "getHello",int.class,new XC_MethodReplacement() {
                 @Override
                 protected Object replaceHookedMethod(MethodHookParam methodHookParam) throws Throwable {
                     Log.e(TAG, "methodHookParam:" + methodHookParam.method.getName());

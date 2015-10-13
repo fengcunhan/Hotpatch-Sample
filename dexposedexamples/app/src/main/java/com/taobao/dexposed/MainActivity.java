@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
 		mLogContent = (TextView) (this.findViewById(R.id.log_content));
 		// check device if support and auto load libs
         isSupport = DexposedBridge.canDexposed(this);
-        isLDevice = android.os.Build.VERSION.SDK_INT == 21;
+        //isLDevice = android.os.Build.VERSION.SDK_INT == 21;
 
 
 	}
@@ -92,7 +92,7 @@ public class MainActivity extends Activity {
 	private void patch(){
 		File cacheDir = getExternalCacheDir();
 		if(cacheDir != null){
-			String fullpath = "/sdcard/app-release.apk";
+			String fullpath = "/sdcard/app-debug.apk";
 			File file=new File(fullpath);
 
 			PatchResult result = PatchMain.load(this, fullpath, null);
